@@ -12,6 +12,12 @@ const Root = styled.div<{}>({
   height: '100%',
   width: 400,
   borderRight: `1px solid ${colors.grayChateau}`,
+  flexShrink: 0,
+});
+
+const UsersList = styled.div<{}>({
+  maxHeight: '100%',
+  overflow: 'auto',
 });
 
 const Title = styled.div<{}>({
@@ -34,12 +40,14 @@ const Sidebar = ({ users }: Props) => {
     <Root>
       <Title>Users</Title>
       <Separator size={32} />
-      {users.map((user, idx) => (
-        <React.Fragment key={`${user.name}-${idx}`}>
-          {idx !== 0 && <Separator size={12} />}
-          <User>{user.name}</User>
-        </React.Fragment>
-      ))}
+      <UsersList>
+        {users.map((user, idx) => (
+          <React.Fragment key={`${user.name}-${idx}`}>
+            {idx !== 0 && <Separator size={12} />}
+            <User>{user.name}</User>
+          </React.Fragment>
+        ))}
+      </UsersList>
     </Root>
   );
 };

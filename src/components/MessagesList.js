@@ -11,11 +11,12 @@ const Root = styled.div<{}>({
   borderBottom: `1px solid ${colors.grayChateau}`,
   padding: 20,
   height: '100%',
+  overflow: 'auto',
 });
 
 const MessageContainer = styled.div<{}>({
   display: 'flex',
-  alignItems: 'center',
+  alignItems: 'flex-start',
 });
 
 const User = styled.div<{}>({
@@ -37,7 +38,7 @@ const MessagesList = ({ messages }) => {
           {idx !== 0 && <Separator size={8} />}
           <MessageContainer>
             <User>{message.author}:</User>
-            <Separator size={4} />
+            <Separator size={8} />
             <Message>{message.message}</Message>
           </MessageContainer>
         </React.Fragment>

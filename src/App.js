@@ -16,7 +16,7 @@ const Root = styled.div<{}>({
 const Messages = styled.div<{}>({
   display: 'flex',
   flexDirection: 'column',
-  flex: 1,
+  width: '100%',
   height: '100%',
 });
 
