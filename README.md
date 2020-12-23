@@ -1,5 +1,8 @@
 # Chat App
-This application allows users to send real time messages via the browser.
+![](./result.gif)
+
+This application allows users to send real time messages via the browser. Inspired by the tutorial made by flaviocopes - https://github.com/flaviocopes/chat-app-react-redux-saga-websockets.
+
 
 ## Installation
 ```
