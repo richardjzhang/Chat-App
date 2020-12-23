@@ -4,7 +4,7 @@ type UserActionTypes = 'ADD_USER' | 'USERS_LIST';
 
 type UserId = string;
 type UserName = string;
-type UserData = {| id: UserId, name: UserName |};
+type UserData = {| name: UserName |};
 type Users = Array<UserData>;
 
 type MessageId = number;

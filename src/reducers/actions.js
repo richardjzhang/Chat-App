@@ -30,7 +30,7 @@ export const messageReceived = (
   author,
 });
 
-export const populateUserDataList = (users: Users): UserAction => ({
+export const populateUsersList = (users: Users): UserAction => ({
   type: types.USERS_LIST,
   users,
 });

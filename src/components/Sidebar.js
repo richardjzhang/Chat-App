@@ -20,16 +20,26 @@ const Title = styled.div<{}>({
   fontWeight: 600,
 });
 
+const User = styled.div<{}>({
+  color: colors.cloudBurst,
+  fontSize: 24,
+});
+
 type Props = {|
   users: Users,
 |};
 
 const Sidebar = ({ users }: Props) => {
-  console.log(users);
   return (
     <Root>
       <Title>Users</Title>
       <Separator size={32} />
+      {users.map((user, idx) => (
+        <React.Fragment key={`${user.name}-${idx}`}>
+          {idx !== 0 && <Separator size={12} />}
+          <User>{user.name}</User>
+        </React.Fragment>
+      ))}
     </Root>
   );
 };

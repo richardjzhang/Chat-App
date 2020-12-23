@@ -4,8 +4,12 @@ import './index.css';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
-import reducers from 'src/utils/reducers';
 import WebFont from 'webfontloader';
+
+import reducers from 'src/reducers';
+import username from 'src/utils/names';
+import handleNewMessage from 'src/utils/sagas';
+import setupSocket from 'src/utils/sockets';
 
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -16,9 +20,11 @@ WebFont.load({
   },
 });
 
+// WebSocket and Reducer setup
 const sagaMiddleware = createSagaMiddleware();
-
 const store = createStore(reducers, applyMiddleware(sagaMiddleware));
+const socket = setupSocket(store.dispatch, username);
+sagaMiddleware.run(handleNewMessage, { socket, username });
 
 ReactDOM.render(
   <Provider store={store}>
