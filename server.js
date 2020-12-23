@@ -1,10 +1,16 @@
-// Define WebSocket using ws library
-const WebSocket = require('ws');
+const express = require('express');
+const path = require('path');
+const { OPEN, Server } = require('ws');
 
-// Initialise wss as a new Websocket Server running in port 8989
-const PORT = 8989;
-const wss = new WebSocket.Server({ port: PORT });
+const PORT = process.env.PORT || 8080;
 
+const app = express();
+const server = app
+  .use(express.static(path.join(__dirname, 'client/build')))
+  .listen(PORT, () => console.log(`Chat Server listening on port ${PORT}!`));
+
+// Initialise wss as a new Websocket Server running in port 8080
+const wss = new Server({ server });
 // Array of users currently logged in. Serves as the Database.
 let users = [];
 
@@ -13,7 +19,7 @@ const broadcast = (data, ws) => {
   wss.clients.forEach((client) => {
     // The check client !== ws ensures that you don't double up with
     // client side updating for adding messages
-    if (client.readyState === WebSocket.OPEN && client !== ws) {
+    if (client.readyState === OPEN && client !== ws) {
       client.send(JSON.stringify(data));
     }
   });
@@ -78,4 +84,7 @@ wss.on('connection', (ws) => {
   });
 });
 
-console.log(`Listening on port ${PORT}`);
+// Handles any requests that don't match the ones above
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname + '/client/build/index.html'));
+});

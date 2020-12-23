@@ -1,19 +1,12 @@
 [declarations]
 .*/node_modules/@emotion/.*
-.*/node_modules/jsx-content/.*
-.*/node_modules/relay-runtime/.*
-.*/node_modules/react-relay/.*
-.*/node_modules/flowgen/.*
 
 [include]
 
 [ignore]
-<PROJECT_ROOT>/.now/.*
-.*/diagnostic-question-viewer/.*
-.*/grading-service/.*
+server.js
 
 [libs]
-./globals-flow-definitions.js
 
 [lints]
 
@@ -32,3 +25,4 @@ server.max_workers=4
 
 [version]
 0.122.0
+

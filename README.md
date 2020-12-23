@@ -2,11 +2,17 @@
 This application allows users to send real time messages via the browser.
 
 ## Installation
-`yarn install`
+```
+yarn install
+cd client yarn install
+```
 
 ## Running the project
 ### Client
-`yarn start`
+```
+cd client
+yarn start
+```
 
 ### Server
 `node server.js`
