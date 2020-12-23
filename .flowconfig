@@ -1,0 +1,34 @@
+[declarations]
+.*/node_modules/@emotion/.*
+.*/node_modules/jsx-content/.*
+.*/node_modules/relay-runtime/.*
+.*/node_modules/react-relay/.*
+.*/node_modules/flowgen/.*
+
+[include]
+
+[ignore]
+<PROJECT_ROOT>/.now/.*
+.*/diagnostic-question-viewer/.*
+.*/grading-service/.*
+
+[libs]
+./globals-flow-definitions.js
+
+[lints]
+
+[options]
+module.name_mapper='^src/\(.*\)$' -> '<PROJECT_ROOT>/src/\1'
+
+suppress_comment= \\(.\\|\n\\)*\\$FlowFixMe
+suppress_comment= \\(.\\|\n\\)*\\$FlowIgnore
+suppress_type=$FlowFixMeProps
+
+esproposal.optional_chaining=enable
+
+server.max_workers=4
+
+[strict]
+
+[version]
+0.122.0

@@ -1,14 +1,32 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import createSagaMiddleware from 'redux-saga';
+import reducers from 'src/utils/reducers';
+import WebFont from 'webfontloader';
+
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+WebFont.load({
+  google: {
+    families: ['Jost:400', 'Jost:500', 'Jost:600', 'sans-serif'],
+  },
+});
+
+const sagaMiddleware = createSagaMiddleware();
+
+const store = createStore(reducers, applyMiddleware(sagaMiddleware));
+
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+  <Provider store={store}>
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  </Provider>,
+  document.getElementById('root'),
 );
 
 // If you want to start measuring performance in your app, pass a function
