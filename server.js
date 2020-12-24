@@ -48,11 +48,12 @@ wss.on('connection', (ws) => {
   let userId = Math.floor(Math.random() * 10 ** 10);
   ws.on('message', (message) => {
     const data = JSON.parse(message);
+    const user = { name: data.name, id: userId };
     console.log(message);
     switch (data.type) {
       case 'ADD_USER': {
         // When we add the new user to the array of users, use userId
-        users.push({ name: data.name, id: userId });
+        users.push(user);
         ws.send(
           JSON.stringify({
             type: 'USERS_LIST',
@@ -65,6 +66,12 @@ wss.on('connection', (ws) => {
             users,
           },
           ws,
+        );
+        ws.send(
+          JSON.stringify({
+            type: 'ADD_USER',
+            user,
+          }),
         );
         break;
       }

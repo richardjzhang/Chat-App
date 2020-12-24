@@ -31,14 +31,16 @@ const Message = styled.div<{}>({
   fontSize: 16,
 });
 
-const MessagesList = ({ messages }) => {
+const MessagesList = ({ messages, user }) => {
   return (
     <Root>
       {messages.map((message, idx) => {
-        const isAuthor = message.author === 'Me';
+        const prevMessage = idx > 0 ? messages[idx - 1] : null;
+        const groupMessages = prevMessage?.author.id === message.author.id;
+        const isAuthor = message.author.id === user.id;
         return (
           <React.Fragment key={message.id}>
-            {idx !== 0 && <Separator size={isAuthor ? 4 : 16} />}
+            {idx !== 0 && <Separator size={groupMessages ? 4 : 16} />}
             <div css={{ display: 'flex' }}>
               {isAuthor && <Separator grow size={16} />}
               <MessageContainer
@@ -52,7 +54,7 @@ const MessagesList = ({ messages }) => {
                 {!isAuthor && (
                   <>
                     <User>{message.author}</User>
-                    <Separator size={8} />
+                    <Separator size={4} />
                   </>
                 )}
                 <Message>{message.message}</Message>
@@ -68,6 +70,7 @@ const MessagesList = ({ messages }) => {
 export const MessagesListContainer = connect(
   (state: ReducerState) => ({
     messages: state.messages,
+    user: state.user,
   }),
   {},
 )(MessagesList);

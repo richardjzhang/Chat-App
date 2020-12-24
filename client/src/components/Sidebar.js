@@ -4,7 +4,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import Separator from 'src/primitives/Separator';
-import type { ReducerState, Users } from 'src/reducers/types';
+import type { FullUser, ReducerState, Users } from 'src/reducers/types';
 import { colors } from 'src/styles';
 
 const Root = styled.div<{}>({
@@ -32,19 +32,26 @@ const User = styled.div<{}>({
 });
 
 type Props = {|
+  user: FullUser,
   users: Users,
 |};
 
-const Sidebar = ({ users }: Props) => {
+const Sidebar = ({ users, user }: Props) => {
   return (
     <Root>
-      <Title>Users ({users.length})</Title>
+      <Title>Users ({users.length || 1})</Title>
       <Separator size={32} />
+      <User>{user?.name ?? 'You'}</User>
+      {users.length > 1 && <Separator size={12} />}
       <UsersList>
-        {users.map((user, idx) => (
-          <React.Fragment key={`${user.name}-${idx}`}>
-            {idx !== 0 && <Separator size={12} />}
-            <User>{user.name}</User>
+        {users.map((u, idx) => (
+          <React.Fragment key={u.id}>
+            {user?.id !== u.id && (
+              <>
+                <User>{u.name}</User>
+                {idx !== users.length - 1 && <Separator size={12} />}
+              </>
+            )}
           </React.Fragment>
         ))}
       </UsersList>
@@ -54,6 +61,7 @@ const Sidebar = ({ users }: Props) => {
 
 export const SidebarContainer = connect(
   (state: ReducerState) => ({
+    user: state.user,
     users: state.users,
   }),
   {},

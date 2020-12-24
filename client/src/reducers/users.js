@@ -1,8 +1,8 @@
 // @flow
 import * as types from './constants';
-import type { UserAction, UserData } from './types';
+import type { UserListAction, Users } from './types';
 
-const users = (state: Array<UserData> = [], action: UserAction) => {
+const users = (state: Users = [], action: UserListAction) => {
   switch (action.type) {
     case types.USERS_LIST:
       return action.users;

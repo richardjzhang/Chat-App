@@ -4,7 +4,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { addMessage } from 'src/reducers/actions';
-import type { MessageAction, Message, MessageAuthor } from 'src/reducers/types';
+import type {
+  MessageAction,
+  Message,
+  FullUser,
+  ReducerState,
+} from 'src/reducers/types';
 import { colors } from 'src/styles';
 
 const Root = styled.div<{}>({
@@ -24,7 +29,8 @@ const Input = styled.textarea<{}>({
 });
 
 type Props = {|
-  dispatch: (message: Message, author: MessageAuthor) => void,
+  user: FullUser,
+  dispatch: (message: Message, author: FullUser) => void,
 |};
 
 const AddMessage = (props: Props) => {
@@ -36,9 +42,11 @@ const AddMessage = (props: Props) => {
         value={message}
         onChange={(e) => setMessage(e.target.value)}
         onKeyPress={(e) => {
+          const trimmedMessage = message.trim();
           if (e.key === 'Enter') {
             e.preventDefault();
-            props.dispatch(message, 'Me');
+            if (trimmedMessage !== '')
+              props.dispatch(message, { id: props.user.id, name: 'Me' });
             setMessage('');
           }
         }}
@@ -48,11 +56,16 @@ const AddMessage = (props: Props) => {
 };
 
 const mapDispatchToProps = (dispatch: (MessageAction) => void) => ({
-  dispatch: (message: Message, author: MessageAuthor) => {
+  dispatch: (message: Message, author: FullUser) => {
     dispatch(addMessage(message, author));
   },
 });
 
-const AddMessageContainer = connect(() => ({}), mapDispatchToProps)(AddMessage);
+const AddMessageContainer = connect(
+  () => (state: ReducerState) => ({
+    user: state.user,
+  }),
+  mapDispatchToProps,
+)(AddMessage);
 
 export default AddMessageContainer;

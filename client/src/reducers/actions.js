@@ -3,8 +3,10 @@ import * as types from './constants';
 import type {
   MessageAction,
   Message,
-  MessageAuthor,
+  FullUser,
   UserAction,
+  UserListAction,
+  User,
   Users,
 } from './types';
 
@@ -12,7 +14,7 @@ let nextMessageId = 0;
 
 export const addMessage = (
   message: Message,
-  author: MessageAuthor,
+  author: FullUser,
 ): MessageAction => ({
   type: types.ADD_MESSAGE,
   id: nextMessageId++,
@@ -22,7 +24,7 @@ export const addMessage = (
 
 export const messageReceived = (
   message: Message,
-  author: MessageAuthor,
+  author: FullUser,
 ): MessageAction => ({
   type: types.MESSAGE_RECEIVED,
   id: nextMessageId++,
@@ -30,7 +32,12 @@ export const messageReceived = (
   author,
 });
 
-export const populateUsersList = (users: Users): UserAction => ({
+export const populateUsersList = (users: Users): UserListAction => ({
   type: types.USERS_LIST,
   users,
+});
+
+export const addUser = (user: User): UserAction => ({
+  type: types.ADD_USER,
+  user,
 });
