@@ -19,3 +19,11 @@ export const colors = {
   white: '#FFF',
   black: '#000000',
 };
+
+// It doesn't fix all the possible issues on all browsers or devices, feel free to add rules
+export const tappable = {
+  cursor: 'pointer',
+  userSelect: 'none', // to prevent the text selection (e.g. selecting text triggers the copy-paste popup menu on iOS and Android)
+  WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)', // to prevent the default tap highlight colour being applied
+  WebkitTouchCallout: 'none', // to prevent the context menu from showing, at least on iOS for anchor elements
+};

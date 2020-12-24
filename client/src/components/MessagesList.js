@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import React from 'react';
 import { connect } from 'react-redux';
 
-import Separator from 'src/components/Separator';
+import Separator from 'src/primitives/Separator';
 import type { ReducerState } from 'src/reducers/types';
 import { colors } from 'src/styles';
 
@@ -33,16 +33,19 @@ const Message = styled.div<{}>({
 const MessagesList = ({ messages }) => {
   return (
     <Root>
-      {messages.map((message, idx) => (
-        <React.Fragment key={message.id}>
-          {idx !== 0 && <Separator size={8} />}
-          <MessageContainer>
-            <User>{message.author}:</User>
-            <Separator size={8} />
-            <Message>{message.message}</Message>
-          </MessageContainer>
-        </React.Fragment>
-      ))}
+      {messages.map((message, idx) => {
+        console.log(message);
+        return (
+          <React.Fragment key={message.id}>
+            {idx !== 0 && <Separator size={8} />}
+            <MessageContainer>
+              <User>{message.author}:</User>
+              <Separator size={8} />
+              <Message>{message.message}</Message>
+            </MessageContainer>
+          </React.Fragment>
+        );
+      })}
     </Root>
   );
 };

@@ -1,4 +1,8 @@
 // @flow
+import { createStore, applyMiddleware } from 'redux';
+import createSagaMiddleware from 'redux-saga';
+
+import reducers from 'src/reducers';
 import { messageReceived, populateUsersList } from 'src/reducers/actions';
 import * as types from 'src/reducers/constants';
 import type { MessageAction, UserAction, UserName } from 'src/reducers/types';
@@ -41,4 +45,7 @@ const setupSocket = (
   return socket;
 };
 
-export default setupSocket;
+const sagaMiddleware = createSagaMiddleware();
+const store = createStore(reducers, applyMiddleware(sagaMiddleware));
+
+export { sagaMiddleware, setupSocket, store };

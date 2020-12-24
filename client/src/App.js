@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import React from 'react';
 
 import AddMessage from 'src/components/AddMessage';
+import ChooseName from 'src/components/ChooseName';
 import MessagesList from 'src/components/MessagesList';
 import Sidebar from 'src/components/Sidebar';
 
@@ -23,6 +24,7 @@ const Messages = styled.div<{}>({
 function App() {
   return (
     <Root>
+      <ChooseName />
       <Sidebar />
       <Messages>
         <MessagesList />

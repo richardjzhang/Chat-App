@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import React from 'react';
 import { connect } from 'react-redux';
 
-import Separator from 'src/components/Separator';
+import Separator from 'src/primitives/Separator';
 import type { ReducerState, Users } from 'src/reducers/types';
 import { colors } from 'src/styles';
 
@@ -38,7 +38,7 @@ type Props = {|
 const Sidebar = ({ users }: Props) => {
   return (
     <Root>
-      <Title>Users</Title>
+      <Title>Users ({users.length})</Title>
       <Separator size={32} />
       <UsersList>
         {users.map((user, idx) => (
