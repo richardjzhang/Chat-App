@@ -7,8 +7,14 @@ const setupSocket = (
   dispatch: (MessageAction | UserAction) => void,
   username: UserName,
 ) => {
+  const { NODE_ENV = 'production', WEBSOCKET_DEV_PORT = 8989 } = process.env;
   const HOST = location.origin.replace(/^http/, 'ws');
-  const socket = new WebSocket(HOST);
+
+  // If in development mode, hook up to local websocket running on separate server.
+  // Otherwise, use current port
+  const socket = new WebSocket(
+    NODE_ENV === 'production' ? HOST : `ws://localhost:${WEBSOCKET_DEV_PORT}`,
+  );
 
   socket.onopen = () => {
     socket.send(

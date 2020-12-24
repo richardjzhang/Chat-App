@@ -1,16 +1,32 @@
 const express = require('express');
 const path = require('path');
-const { OPEN, Server } = require('ws');
+const WebSocket = require('ws');
+const cors = require('cors');
+require('dotenv').config();
 
-const PORT = process.env.PORT || 8080;
+const {
+  PORT = 8080,
+  NODE_ENV = 'production',
+  WEBSOCKET_DEV_PORT = 8989,
+} = process.env;
 
 const app = express();
+app.use(cors());
 const server = app
   .use(express.static(path.join(__dirname, 'client/build')))
-  .listen(PORT, () => console.log(`Chat Server listening on port ${PORT}!`));
+  .listen(PORT, () =>
+    console.log(
+      `Chat Server listening on port ${
+        NODE_ENV === 'production' ? PORT : WEBSOCKET_DEV_PORT
+      }!`,
+    ),
+  );
 
-// Initialise wss as a new Websocket Server running in port 8080
-const wss = new Server({ server });
+// Initialise wss as a new Websocket Server
+const wss =
+  NODE_ENV === 'production'
+    ? new WebSocket.Server({ server })
+    : new WebSocket.Server({ port: WEBSOCKET_DEV_PORT });
 // Array of users currently logged in. Serves as the Database.
 let users = [];
 
@@ -19,7 +35,7 @@ const broadcast = (data, ws) => {
   wss.clients.forEach((client) => {
     // The check client !== ws ensures that you don't double up with
     // client side updating for adding messages
-    if (client.readyState === OPEN && client !== ws) {
+    if (client.readyState === WebSocket.OPEN && client !== ws) {
       client.send(JSON.stringify(data));
     }
   });

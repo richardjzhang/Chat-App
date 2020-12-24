@@ -1,26 +1,38 @@
 # Chat App
 ![](./result.gif)
 
-This application allows users to send real time messages via the browser. Inspired by the tutorial made by flaviocopes - https://github.com/flaviocopes/chat-app-react-redux-saga-websockets.
-
+This application allows users to send real time messages via the browser. Inspired by the tutorial made by [flaviocopes](https://github.com/flaviocopes/chat-app-react-redux-saga-websockets).
 
 ## Installation
 ```
 yarn install
-cd client yarn install
+cd client
+yarn install
 ```
 
-## Running the project
-### Client
+## Running the project locally
+### Environment Variables
+See the `.env.example` file and configure those variables. You can take a look in `server.js` for the default values I've used if they are undefined.
+
+### Run the Client
 ```
 cd client
 yarn start
 ```
 
-### Server
+### Run the Server
 `node server.js`
 
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+## Running the project on a build
+### Make a build for the client side
+`yarn build`
+
+### Run the Server
+`node server.js`
+
+Open [http://localhost:8080](http://localhost:8080) to view it in the browser.
 
 ## Available Scripts
 In the project directory, you can run:
