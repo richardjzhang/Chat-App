@@ -1,4 +1,5 @@
 // @flow
+/** @jsxImportSource @emotion/react */
 import styled from '@emotion/styled';
 import React from 'react';
 import { connect } from 'react-redux';
@@ -15,18 +16,18 @@ const Root = styled.div<{}>({
 });
 
 const MessageContainer = styled.div<{}>({
-  display: 'flex',
-  alignItems: 'flex-start',
+  padding: 12,
+  borderRadius: 16,
+  width: 'fit-content',
+  maxWidth: 400,
 });
 
 const User = styled.div<{}>({
-  color: colors.cloudBurst,
   fontSize: 16,
   fontWeight: 600,
 });
 
 const Message = styled.div<{}>({
-  color: colors.cloudBurst,
   fontSize: 16,
 });
 
@@ -34,15 +35,29 @@ const MessagesList = ({ messages }) => {
   return (
     <Root>
       {messages.map((message, idx) => {
-        console.log(message);
+        const isAuthor = message.author === 'Me';
         return (
           <React.Fragment key={message.id}>
-            {idx !== 0 && <Separator size={8} />}
-            <MessageContainer>
-              <User>{message.author}:</User>
-              <Separator size={8} />
-              <Message>{message.message}</Message>
-            </MessageContainer>
+            {idx !== 0 && <Separator size={isAuthor ? 4 : 16} />}
+            <div css={{ display: 'flex' }}>
+              {isAuthor && <Separator grow size={16} />}
+              <MessageContainer
+                css={{
+                  backgroundColor: isAuthor
+                    ? colors.dodgerBlue
+                    : colors.athensGray,
+                  color: isAuthor ? colors.white : colors.cloudBurst,
+                }}
+              >
+                {!isAuthor && (
+                  <>
+                    <User>{message.author}</User>
+                    <Separator size={8} />
+                  </>
+                )}
+                <Message>{message.message}</Message>
+              </MessageContainer>
+            </div>
           </React.Fragment>
         );
       })}
