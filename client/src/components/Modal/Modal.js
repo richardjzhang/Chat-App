@@ -4,7 +4,7 @@ import { keyframes } from '@emotion/react';
 import React, { createRef, Component } from 'react';
 
 import type { DefaultProps, Props } from 'src/components/Modal';
-import Overlay, { exitAnimationDuration } from 'src/primitives/Overlay';
+import Overlay, { exitAnimationDuration } from 'src/components/Overlay';
 import { colors } from 'src/styles';
 import { type ReactRefType } from 'src/utils/flow';
 

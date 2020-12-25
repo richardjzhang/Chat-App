@@ -2,7 +2,7 @@
 /** @jsxImportSource @emotion/react */
 import React from 'react';
 
-import Separator from 'src/primitives/Separator';
+import Separator from 'src/components/Separator';
 
 export function ModalFooter({
   children,
@@ -13,7 +13,7 @@ export function ModalFooter({
 |}) {
   return (
     <React.Fragment>
-      <Separator size={40} />
+      <Separator size={32} />
       <div
         css={{
           display: 'flex',

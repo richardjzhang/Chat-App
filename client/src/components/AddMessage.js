@@ -3,6 +3,8 @@ import styled from '@emotion/styled';
 import React from 'react';
 import { connect } from 'react-redux';
 
+import AutoTextArea from 'src/components/AutoTextArea';
+import Separator from 'src/components/Separator';
 import { addMessage } from 'src/reducers/actions';
 import type {
   MessageAction,
@@ -10,22 +12,19 @@ import type {
   FullUser,
   ReducerState,
 } from 'src/reducers/types';
-import { colors } from 'src/styles';
+import sendIcon from 'src/static/assets/send.svg';
+import { tappable } from 'src/styles';
 
 const Root = styled.div<{}>({
+  display: 'flex',
+  alignItems: 'center',
   padding: 20,
-  height: 200,
 });
 
-const Input = styled.textarea<{}>({
-  width: '100%',
-  height: '100%',
-  outline: 'none',
-  padding: 8,
-  resize: 'none',
-  backgroundColor: colors.athensGray,
-  border: 'none',
-  borderRadius: 8,
+const SendIcon = styled.img<{}>({
+  height: 24,
+  width: 24,
+  ...tappable,
 });
 
 type Props = {|
@@ -34,23 +33,35 @@ type Props = {|
 |};
 
 const AddMessage = (props: Props) => {
+  const textAreaRef = React.useRef(null);
   const [message, setMessage] = React.useState('');
+
+  function handleSendMessage() {
+    if (textAreaRef != null) {
+      textAreaRef.current?.focus();
+    }
+    const trimmedMessage = message.trim();
+    if (trimmedMessage !== '')
+      props.dispatch(message, { id: props.user.id, name: 'Me' });
+    setMessage('');
+  }
+
   return (
     <Root>
-      <Input
+      <AutoTextArea
+        textAreaRef={textAreaRef}
         placeholder="Aa"
-        value={message}
-        onChange={(e) => setMessage(e.target.value)}
+        text={message}
+        onChange={(text) => setMessage(text)}
         onKeyPress={(e) => {
-          const trimmedMessage = message.trim();
           if (e.key === 'Enter') {
             e.preventDefault();
-            if (trimmedMessage !== '')
-              props.dispatch(message, { id: props.user.id, name: 'Me' });
-            setMessage('');
+            handleSendMessage();
           }
         }}
       />
+      <Separator size={12} />
+      <SendIcon src={sendIcon} alt="Send" onClick={handleSendMessage} />
     </Root>
   );
 };

@@ -11,13 +11,13 @@ import { sagaMiddleware, setupSocket, store } from 'src/utils/sockets';
 
 const Title = styled.div<{}>({
   color: colors.cloudBurst,
-  fontSize: 24,
+  fontSize: 32,
   fontWeight: 600,
 });
 
 const Subtitle = styled.div<{}>({
   color: colors.cloudBurst,
-  fontSize: 16,
+  fontSize: 20,
 });
 
 const Input = styled.input<{}>({

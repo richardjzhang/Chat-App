@@ -2,7 +2,7 @@
 import React, { createRef, Component } from 'react';
 import type { Node } from 'react';
 
-import Portal from 'src/helpers/Portal';
+import Portal from 'src/components/Portal';
 import { type ReactRefType } from 'src/utils/flow';
 
 import Modal, { exitAnimationDuration } from './Modal';

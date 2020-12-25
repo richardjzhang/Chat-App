@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import React from 'react';
 import { connect } from 'react-redux';
 
-import Separator from 'src/primitives/Separator';
+import Separator from 'src/components/Separator';
 import type { FullUser, ReducerState, Users } from 'src/reducers/types';
 import { colors } from 'src/styles';
 

@@ -4,16 +4,15 @@ import styled from '@emotion/styled';
 import React from 'react';
 import { connect } from 'react-redux';
 
-import Separator from 'src/primitives/Separator';
+import Separator from 'src/components/Separator';
 import type { ReducerState } from 'src/reducers/types';
-import { colors } from 'src/styles';
+import { breakpoints, colors } from 'src/styles';
 
 const Root = styled.div<{}>({
   display: 'flex',
   flexDirection: 'column-reverse',
   borderBottom: `1px solid ${colors.grayChateau}`,
-  marginTop: 20, // A hack to ensure that there is space at the top when the div overflows
-  padding: '0 20px 20px 20px',
+  padding: 20,
   height: '100%',
   overflow: 'auto',
 });
@@ -23,6 +22,10 @@ const MessageContainer = styled.div<{}>({
   borderRadius: 16,
   width: 'fit-content',
   maxWidth: 400,
+
+  [`@media (max-width: ${breakpoints.tablet + 1}px)`]: {
+    maxWidth: 300,
+  },
 });
 
 const User = styled.div<{}>({

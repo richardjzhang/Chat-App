@@ -1,2 +1,2 @@
 // @flow
-export type ReactRefType<T> = {| current: null | T |};
+export type ReactRefType<T> = {| current: ?T |};

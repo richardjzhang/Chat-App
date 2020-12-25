@@ -14,6 +14,7 @@ export const colors = {
   // Greys
   athensGray: '#E7E7EF',
   grayChateau: '#A2AAB3',
+  shuttleGray: '#616470',
 
   // Other
   white: '#FFF',
@@ -26,4 +27,8 @@ export const tappable = {
   userSelect: 'none', // to prevent the text selection (e.g. selecting text triggers the copy-paste popup menu on iOS and Android)
   WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)', // to prevent the default tap highlight colour being applied
   WebkitTouchCallout: 'none', // to prevent the context menu from showing, at least on iOS for anchor elements
+};
+
+export const breakpoints = {
+  tablet: 768,
 };
