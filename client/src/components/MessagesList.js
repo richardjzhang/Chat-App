@@ -12,7 +12,8 @@ const Root = styled.div<{}>({
   display: 'flex',
   flexDirection: 'column-reverse',
   borderBottom: `1px solid ${colors.grayChateau}`,
-  padding: 20,
+  marginTop: 12, // Hack to ensure that there is space above when there is overflow
+  padding: '0 20px 12px 20px',
   height: '100%',
   overflow: 'auto',
 });

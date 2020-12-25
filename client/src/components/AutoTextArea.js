@@ -12,23 +12,30 @@ import type { ReactRefType } from 'src/utils/flow';
 */
 
 const MAX_HEIGHT = 90;
+const VERTICAL_PADDING = 4;
+const HORIZONTAL_PADDING = 12;
 
 const Parent = styled.div<{}>({
+  padding: `${VERTICAL_PADDING}px ${HORIZONTAL_PADDING}px`,
+  minHeight: 36,
   maxHeight: MAX_HEIGHT,
   width: '100%',
+  display: 'flex',
+  alignItems: 'center',
   transition: 'height 0.25s ease',
+  backgroundColor: colors.athensGray,
+  borderRadius: 20,
 });
 
 const TextArea = styled.textarea<{}>({
-  maxHeight: MAX_HEIGHT,
+  maxHeight: '100%',
   width: '100%',
   outline: 'none',
-  padding: 12,
+  padding: 0,
   display: 'block',
   resize: 'none',
-  backgroundColor: colors.athensGray,
   border: 'none',
-  borderRadius: 20,
+  backgroundColor: colors.athensGray,
   transition: 'height 0.25s ease',
 });
 
@@ -57,7 +64,7 @@ const AutoTextArea = ({
         setParentHeight('auto');
         setTextAreaHeight('auto');
       } else {
-        setParentHeight(`${scrollHeight}px`);
+        setParentHeight(`${scrollHeight + 2 * VERTICAL_PADDING}px`);
         setTextAreaHeight(`${scrollHeight}px`);
       }
     }
