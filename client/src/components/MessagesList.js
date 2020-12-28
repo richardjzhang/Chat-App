@@ -24,7 +24,7 @@ const MessageContainer = styled.div<{}>({
   width: 'fit-content',
   maxWidth: 400,
 
-  [`@media (max-width: ${breakpoints.tablet + 1}px)`]: {
+  [`@media (max-width: ${breakpoints.laptop + 1}px)`]: {
     maxWidth: 300,
   },
 });

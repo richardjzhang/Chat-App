@@ -1,20 +1,17 @@
 // @flow
 import React from 'react';
+import { isMobile } from 'react-device-detect';
 
-import ChooseName from 'src/components/ChooseName';
-import Media from 'src/components/Media';
-import { breakpoints } from 'src/styles';
-import Desktop from 'src/views/Desktop';
-import TouchDevice from 'src/views/TouchDevice';
+const Desktop = React.lazy(() => import('src/views/Desktop'));
+const TouchDevice = React.lazy(() => import('src/views/TouchDevice'));
+const ChooseName = React.lazy(() => import('src/components/ChooseName'));
 
 function App() {
   return (
-    <>
+    <React.Suspense fallback={<div>Loading...</div>}>
       <ChooseName />
-      <Media query={`(min-width: ${breakpoints.tablet + 1}px)`}>
-        {(isDesktopView) => (isDesktopView ? <Desktop /> : <TouchDevice />)}
-      </Media>
-    </>
+      {isMobile ? <TouchDevice /> : <Desktop />}
+    </React.Suspense>
   );
 }
 

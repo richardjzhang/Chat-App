@@ -30,5 +30,5 @@ export const tappable = {
 };
 
 export const breakpoints = {
-  tablet: 768,
+  laptop: 1024,
 };
