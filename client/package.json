@@ -8,8 +8,17 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "babel-eslint": "^10.1.0",
     "emoji-mart": "^3.0.0",
+    "eslint": "^7.16.0",
+    "eslint-config-prettier": "^7.1.0",
+    "eslint-plugin-flowtype": "^5.2.0",
+    "eslint-plugin-prettier": "^3.3.0",
+    "eslint-plugin-react": "^7.21.5",
     "flow-bin": "^0.122.0",
+    "husky": "^2.3.0",
+    "lint-staged": "^8.1.7",
+    "prettier": "^2.2.1",
     "react": "^17.0.1",
     "react-device-detect": "^1.15.0",
     "react-dom": "^17.0.1",
@@ -40,16 +49,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "babel-eslint": "^10.1.0",
-    "eslint": "^7.16.0",
-    "eslint-config-prettier": "^7.1.0",
-    "eslint-plugin-flowtype": "^5.2.0",
-    "eslint-plugin-prettier": "^3.3.0",
-    "eslint-plugin-react": "^7.21.5",
-    "husky": "^2.3.0",
-    "lint-staged": "^8.1.7",
-    "prettier": "^2.2.1"
   }
 }
